@@ -1,0 +1,28 @@
+{
+    "access" : {
+
+    },
+
+    "file_id": "1lifN2mzC6nDD7aStLtFN3yoaj3BJPsd7",
+
+    "users": [
+      {
+        "username": "kolya",
+        "password": "1",
+        "role": 0
+      },
+      {
+        "username": "Andrei",
+        "password": "2",
+        "role": 0
+      },
+      {
+        "username": "Katya",
+        "password": "q",
+        "role": 0
+      }
+    ],
+    "token": {
+    
+    }
+  }

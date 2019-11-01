@@ -1,8 +1,12 @@
 const express = require('express');
 const path = require('path');
 const session = require('express-session');
-const lowdb = require('lowdb');
 const bodyParser = require('body-parser')
+require('dotenv').config();
+
+const newUsersRouter = require('./routes/newUsers');
+const highestSalaries = require('./routes/higestSalaries');
+const topEmployees = require('./routes/topEmployees');
 
 
 const app = express();
@@ -20,3 +24,7 @@ app.get('/', (req, res, next) => {
     res.send('now then');
     next();
 })
+
+app.use('/new-users', newUsersRouter);
+app.use('/highest-salaries', highestSalaries);
+app.use('/top-employees', topEmployees);
