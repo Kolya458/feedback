@@ -1,5 +1,4 @@
 const {google} = require('googleapis');
-// const token = process.env.token;
 const converter = require('csvtojson');
 const access_token = process.env.access_token;
 const refresh_token = process.env.refresh_token;
