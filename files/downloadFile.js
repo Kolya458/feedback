@@ -1,8 +1,8 @@
 const driveApi = require('../config/driveApi');
-const client_secret = require("../config/db.js").client_secret;
-const redirect_uris = require("../config/db.js").redirect_uris;
-const client_id = require("../config/db.js").client_id;
-const fileId = require('../config/db.js').file_id;
+const client_secret = process.env.client_secret;
+const redirect_uris = process.env.redirect_uris;
+const client_id = process.env.client_id;
+const fileId = process.env.file_Id
 
 
 module.exports = async(resolve,reject) => {
@@ -11,10 +11,8 @@ module.exports = async(resolve,reject) => {
   return csvRow;
 }
 
-// const client_secret = process.env.client_secret;
-// const redirect_uris = process.env.redirect_uris;
-// const client_id = process.env.client_id;
-// const fileId = process.env.file_Id
+
+
 
 
 
