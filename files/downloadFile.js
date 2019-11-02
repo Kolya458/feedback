@@ -2,7 +2,7 @@ const driveApi = require('../config/driveApi');
 const client_secret = process.env.client_secret;
 const redirect_uris = process.env.redirect_uris;
 const client_id = process.env.client_id;
-const fileId = process.env.file_Id
+const fileId = process.env.file_id
 
 
 module.exports = async(resolve,reject) => {
