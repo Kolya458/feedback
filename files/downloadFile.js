@@ -1,8 +1,10 @@
 const driveApi = require('../config/driveApi');
-const client_secret = process.env.client_secret;
-const redirect_uris = process.env.redirect_uris;
-const client_id = process.env.client_id;
-const fileId = process.env.file_Id
+const config = require('config');
+const client_secret = config.get('googleAutorize.client_secret');
+const redirect_uris = config.get('googleAutorize.redirect_uris');
+const client_id = config.get('googleAutorize.client_id');
+const fileId = config.get('files.file_id');
+
 
 
 module.exports = async(resolve,reject) => {
