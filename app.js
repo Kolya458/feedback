@@ -1,10 +1,14 @@
 const express = require('express');
-const bodyParser = require('body-parser')
+const bodyParser = require('body-parser');
 require('dotenv').config();
+const config = require('config');
 
 const newUsersRouter = require('./routes/newUsers');
-const highestSalaries = require('./routes/higestSalaries');
-const topEmployees = require('./routes/topEmployees');
+const newUsersRoute = config.get('routes.newUsers');
+const highestSalariesRouter = require('./routes/higestSalaries');
+const highestSalariesRoute = config.get('routes.highestSalaries');
+const topEmployeesRouter = require('./routes/topEmployees');
+const topEmployeesRoute = config.get('routes.topEmployees');
 
 
 const app = express();
@@ -23,6 +27,6 @@ app.get('/', (req, res, next) => {
     next();
 })
 
-app.use('/new-users', newUsersRouter);
-app.use('/highest-salaries', highestSalaries);
-app.use('/top-employees', topEmployees);
+app.use(newUsersRoute, newUsersRouter);
+app.use(highestSalariesRoute, highestSalariesRouter);
+app.use(topEmployeesRoute, topEmployeesRouter);

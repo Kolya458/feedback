@@ -14,5 +14,11 @@ module.exports = {
         refresh_token: process.env.refresh_token,
         token_type: process.env.token_type,
         expiry_date: process.env.expiry_date
+    },
+
+    routes: {
+        newUsers: '/new-users',
+        highestSalaries: '/highest-salaries',
+        topEmployees: '/top-employees'
     }
 }
