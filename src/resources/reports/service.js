@@ -65,11 +65,18 @@ const usersWithBadges = (csvRow) => {
     const users =  csvRow.slice(1);
     const headers = csvRow.slice(0, 1);
     const usersWithBadges = users.filter(x => x[6] !== '')
-    const badges = usersWithBadges.map(x => x[6]);
     const result = []
     for (i=0; i<usersWithBadges.length; i++) {
         const userWithBadge = usersWithBadges[i];
-        const badgesArray = userWithBadge[6].split('|');
+        const flatBadgesArray = userWithBadge[6].split('|');
+        const entries = []
+        for (let i=0; i<flatBadgesArray.length; i+=2) {
+            entries.push([flatBadgesArray[i], flatBadgesArray[i+1]]);
+        }
+        const badgesArray = []
+        for(let el of entries){
+            badgesArray.push({name: el[0], data: el[1]})
+        }
         result.push({
             [headers[0][0]]: userWithBadge[0],
             [headers[0][1]]: userWithBadge[1],
