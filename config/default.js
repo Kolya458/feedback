@@ -17,8 +17,12 @@ module.exports = {
     },
 
     routes: {
-        newUsers: '/new-users',
-        highestSalaries: '/highest-salaries',
-        topEmployees: '/top-employees'
+        reports: {
+            root: '/reports',
+            newUsers: '/new-users',
+            highestSalaries: '/highest-salaries',
+            topEmployees: '/top-employees'
+        }
+        
     }
 }
