@@ -1,4 +1,4 @@
-const driveApi = require('../config/driveApi');
+const driveApi = require('../googleApi/driveApi');
 const config = require('config');
 const client_secret = config.get('googleAutorize.client_secret');
 const redirect_uris = config.get('googleAutorize.redirect_uris');

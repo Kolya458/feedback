@@ -1,4 +1,4 @@
-const downloadFile = require('../../../files/downloadFile');
+const downloadFile = require('../../mapper/downloadFile');
 const fileFromGoogleDrive = downloadFile()
 
 const getAppropriateData = (req ,res, callback) => {
