@@ -16,6 +16,10 @@ module.exports = {
         expiry_date: process.env.expiry_date
     },
 
+    db: {
+        db_url: process.env.db_url
+    },
+
     routes: {
         reports: {
             root: '/reports',
