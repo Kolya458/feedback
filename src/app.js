@@ -15,14 +15,16 @@ const app = express();
 app.use(bodyParser.urlencoded({extended: false}));
 app.use(bodyParser.json());
 
-mongoose.connect(DB_URL, {useNewUrlParser: true, useUnifiedTopology: true}, (err) => {
+mongoose.connect(DB_URL, {useNewUrlParser: true}, (err) => {
     if(err) {
-        console.log(`error to connect to database`);
+        console.log(`error to connect to database: ${err}`);
     } else {
         console.log(`connect to db`);
     }
 })
+
 require('./models/Users');
+require('../config/passport');
 
 app.get('/', (req, res, next) => {
     res.send('now then');
