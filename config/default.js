@@ -26,6 +26,13 @@ module.exports = {
             newUsers: '/new-users',
             highestSalaries: '/highest-salaries',
             topEmployees: '/top-employees'
+        },
+        
+        users: {
+            root: '/users',
+            profile: '/current',
+            login: '/login',
+            signUp: '/register'
         }
         
     }

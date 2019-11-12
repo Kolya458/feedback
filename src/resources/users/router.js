@@ -1,87 +1,15 @@
-const mongoose = require('mongoose');
-const passport = require('passport');
 const router = require('express').Router();
 const auth = require('../auth/auth');
-const Users = mongoose.model('Users');
+const service = require('./service');
+const config = require('config');
+const signUpRoute = config.get('routes.users.signUp');
+const loginRoute = config.get('routes.users.login');
+const profileRoute = config.get('routes.users.profile');
 
-//POST new user route (optional, everyone has access)
-router.post('/', auth.optional, (req, res, next) => {
-  const {user} = req.body;
+router.post(signUpRoute, auth.optional, service.authAction);
 
-  if(!user.email) {
-    return res.status(422).json({
-      errors: {
-        email: 'is required',
-      },
-    });
-  }
+router.post(loginRoute, auth.optional, service.authAction);
 
-  if(!user.password) {
-    return res.status(422).json({
-      errors: {
-        password: 'is required',
-      },
-    });
-  }
-
-  const finalUser = new Users(user);
-
-  finalUser.setPassword(user.password);
-
-  return finalUser.save()
-    .then(() => res.json({ user: finalUser.toAuthJSON() }));
-});
-
-//POST login route (optional, everyone has access)
-router.post('/login', auth.optional, (req, res, next) => {
-  const { user } = req.body;
-
-  if(!user.email) {
-    return res.status(422).json({
-      error: {
-        email: 'is required',
-      },
-    });
-  }
-
-  if(!user.password) {
-    return res.status(422).json({
-      error: {
-        password: 'is required',
-      },
-    });
-  }
-
-  // console.log(user)
-  return passport.authenticate('local', { session: false }, (err, passportUser, info) => {
-    if(err) {
-      return next(err);
-    }
-
-    if(passportUser) {
-      const user = passportUser;
-      user.token = passportUser.generateJWT();
-
-      return res.json({ user: user.toAuthJSON() });
-    }
-    
-    return res.status(400).send(info);
-  })(req, res, next);
-});
-
-//GET current route (required, only authenticated users have access)
-router.get('/current', auth.required, (req, res, next) => {
-
-  const {id} = req.user;
-
-  return Users.findById(id)
-    .then((user) => {
-      if(!user) {
-        return res.sendStatus(400);
-      }
-
-      return res.json({ user: user.toAuthJSON() });
-    });
-});
+router.get(profileRoute, auth.required, service.getUserProfile);
 
 module.exports = router;
