@@ -41,4 +41,11 @@ UsersSchema.methods.toAuthJSON = function() {
   };
 };
 
+UsersSchema.methods.getUser = function(){
+  return {
+    _id: this.id,
+    email: this.email
+  }
+}
+
 mongoose.model('Users', UsersSchema);
