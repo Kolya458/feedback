@@ -1,0 +1,17 @@
+{
+    "title": "sign up",
+    "description": "Properties required to create an user",
+    "type": "object",
+    "properties": {
+        "email": {
+            "type": "string",
+            "description": "email of the user account"
+        },
+        "password": {
+            "type":"string",
+            "description": "password of the user account"
+        }
+          
+    },
+    "required": ["email", "password"]
+}

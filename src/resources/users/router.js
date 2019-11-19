@@ -5,8 +5,9 @@ const config = require('config');
 const signUpRoute = config.get('routes.users.signUp');
 const loginRoute = config.get('routes.users.login');
 const profileRoute = config.get('routes.users.profile');
+const validateSchema = require('../../common/validation/validation');
 
-router.post(signUpRoute, auth.optional, service.authAction);
+router.post(signUpRoute, validateSchema('sign-up'), auth.optional, service.authAction);
 
 router.post(loginRoute, auth.optional, service.authAction);
 
