@@ -50,20 +50,8 @@ const authAction = (req, res, next) => {
 
     const {user} = req.body;
   
-    if(!user.email) {
-      return res.status(422).json({
-        errors: {
-          email: 'is required',
-        },
-      });
-    }
-  
-    if(!user.password) {
-      return res.status(422).json({
-        errors: {
-          password: 'is required',
-        },
-      });
+    if(!user.email || !user.password){
+      return res.status(400)
     }
 
     switch(req.url) {

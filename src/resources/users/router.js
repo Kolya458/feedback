@@ -9,7 +9,7 @@ const validateSchema = require('../../common/validation/validation');
 
 router.post(signUpRoute, validateSchema('sign-up'), auth.optional, service.authAction);
 
-router.post(loginRoute, auth.optional, service.authAction);
+router.post(loginRoute, validateSchema('login'), auth.optional, service.authAction);
 
 router.get(profileRoute, auth.required, service.getUserProfile);
 

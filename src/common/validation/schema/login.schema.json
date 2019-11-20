@@ -1,6 +1,6 @@
 {
-    "title": "sign up",
-    "description": "Properties required to create an user",
+    "title": "login",
+    "description": "Properties required to log in",
     "type": "object",
     "properties": {
         "user": {
@@ -18,12 +18,10 @@
                 "password": {
                     "type":"string",
                     "description": "password of the user account",
-                    "pattern": "^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[#?!@$%^&*-]).{8,}$",
                     "isNotEmpty": true,
                     "errorMessage": {
                         "type": "password shoul be string",
-                        "isNotEmpty": "please, enter your password",
-                        "pattern": "password should contains minimum 8 characters at least one letter in uppercase, at least one in lowercase, one number and one special symbol"
+                        "isNotEmpty": "please, enter your password"
                     }
                 }
             },
