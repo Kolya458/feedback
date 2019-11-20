@@ -1,8 +1,11 @@
 const downloadFile = require('../../mapper/downloadFile');
-const fileFromGoogleDrive = downloadFile()
+const reportMapper = require('../../mapper/reportMapper');
+const fileFromGoogleDrive = downloadFile();
+
 
 const getAppropriateData = (req ,res, callback) => {
-    fileFromGoogleDrive.then((csvRow) => {
+    fileFromGoogleDrive.then(async(csvReport) => {
+        const csvRow = await reportMapper(csvReport);
         const data = callback(csvRow);
         res.status(200).json({
             users: data

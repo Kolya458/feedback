@@ -30,16 +30,7 @@ const getFile = (auth, fileId) => {
     }, {
         responseType: 'json'
     })
-    .then(response => {
-        return converter({
-            noheader:true,
-            output: "csv"
-            })
-              .fromString(response.data)
-              .then((csvRow)=>{ 
-            return csvRow;
-            })
-    })
+    .then(response => response.data)
     .catch(err => {
         console.log('The API returned an error: ' + err)
         return;
