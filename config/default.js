@@ -35,5 +35,9 @@ module.exports = {
             signUp: '/register'
         }
         
-    }
+    },
+
+    jwt: {
+        secret: 'secret'
+    } 
 }

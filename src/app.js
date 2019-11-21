@@ -1,7 +1,6 @@
 const express = require('express');
 const bodyParser = require('body-parser');
 const mongoose = require('mongoose');
-const session = require('express-session');
 
 require('dotenv').config();
 const config = require('config');
@@ -15,8 +14,6 @@ const app = express();
 
 app.use(bodyParser.urlencoded({extended: false}));
 app.use(bodyParser.json());
-app.use(session({ secret: 'secret', cookie: { maxAge: 60000 }, resave: false, saveUninitialized: false }));
-
 
 mongoose.connect(DB_URL, {useNewUrlParser: true}, (err) => {
     if(err) {
