@@ -9,8 +9,8 @@ const fileId = config.get('files.file_id');
 
 module.exports = async(resolve,reject) => {
   const auth = await driveApi.authorize(client_secret, client_id, redirect_uris);
-  const csvRow = await driveApi.getFile(auth, fileId);
-  return csvRow;
+  const csvReport = await driveApi.getFile(auth, fileId);
+  return csvReport;
 }
 
 
