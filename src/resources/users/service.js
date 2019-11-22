@@ -9,13 +9,23 @@ const signUpRoute = config.get('routes.users.signUp');
 const loginRoute = config.get('routes.users.login');
 const rootRoute = config.get('routes.root');
 
-function createUser (req, res, next, user) {
-    const finalUser = new Users(user);
+const createUser = async (req, res, next, user) => {
+    let isUserExists;
+    await Users.findOne({email: user.email})
+      .then(data => isUserExists = !!data)
+      .catch(err => err);
+
+    if(!isUserExists){
+      const finalUser = new Users(user);
   
-    finalUser.setPassword(user.password);
+      finalUser.setPassword(user.password);
   
-    return finalUser.save()
-      .then(() => res.json({ user: finalUser.toAuthJSON() })).catch(err => {console.log(err)}) ;
+      return finalUser.save()
+        .then(() => res.json({ user: finalUser.toAuthJSON() })).catch(err => {console.log(err)}) ;
+    } else {
+      res.json({error: 'email already in use'})
+    }
+    
 
 };
 
