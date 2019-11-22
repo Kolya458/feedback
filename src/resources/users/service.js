@@ -1,9 +1,13 @@
 const mongoose = require('mongoose');
 const passport = require('passport');
 const Users = mongoose.model('Users');
+const jwt = require('jsonwebtoken');
 const config = require('config');
+
+
 const signUpRoute = config.get('routes.users.signUp');
 const loginRoute = config.get('routes.users.login');
+const rootRoute = config.get('routes.root');
 
 function createUser (req, res, next, user) {
     const finalUser = new Users(user);
@@ -62,8 +66,14 @@ const authAction = (req, res, next) => {
             break;
     }
 }
+
+const logout = (req, res) => {
+  req.logout();
+  res.redirect(rootRoute);
+}
   
 module.exports = {
     getUserProfile,
-    authAction
+    authAction,
+    logout
 }

@@ -21,6 +21,7 @@ module.exports = {
     },
 
     routes: {
+        root: '/',
         reports: {
             root: '/reports',
             newUsers: '/new-users',
@@ -32,7 +33,8 @@ module.exports = {
             root: '/users',
             profile: '/current',
             login: '/login',
-            signUp: '/register'
+            signUp: '/register',
+            logout: '/logout'
         }
         
     },
