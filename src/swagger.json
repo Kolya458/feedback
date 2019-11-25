@@ -1,0 +1,136 @@
+{
+    "swagger": "2.0",
+    "info": {
+        "version": "1.0.0",
+        "title": "feedback",
+        "description": "app for reports view",
+        "license": {
+            "name": "MIT",
+            "url": "https://opensource.org/licenses/MIT"
+        }
+    },
+    "host": "localhost:3000",
+    "basePath": "",
+    "tags": [{
+        "name": "Reports",
+        "description": "Api for reports in the system"
+        },
+        {
+            "name": "Users",
+            "description": "Api for users in the system"
+        }
+    ],
+    "schemes": [
+        "http"
+    ],
+    "consumes": [
+        "application/json"
+    ],
+    "produces": [
+        "application/json"
+    ],
+    "paths": {
+        "/users/register": {
+            "post": {
+                "tags": [
+                    "Users"
+                ],
+                "summary": "Create a new user in system",
+                "parameters": [
+                    {
+                        "in": "body",
+                        "name": "body",
+                        "descripton": "user that we want to create",
+                        "schema": {
+                            "$ref": "#/definitions/credentials"
+                        }
+                    }
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "responses": {
+                    "200" : {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/user"
+                        }
+                    }, 
+                    "400": {
+                        "description": "Failed. Bad post data"
+                    }
+                }
+            }
+        },
+        "/users/login": {
+            "post": {
+                "tags": [
+                    "Users"
+                ],
+                "summary": "Login as user in the system",
+                "parameters": [
+                    {
+                        "in": "body",
+                        "name": "body",
+                        "descripton": "user that we want to create",
+                        "schema": {
+                            "$ref": "#/definitions/credentials"
+                        }
+                    }
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "responses": {
+                    "200" : {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/user"
+                        }
+                    }, 
+                    "400": {
+                        "description": "Failed. Bad post data"
+                    }
+                }
+            }
+        }
+    },
+
+    "definitions":{
+        "user": {
+            "type": "object",
+            "properties": {
+                "user": {
+                    "type": "object",
+                    "properties": {
+                        "_id": {
+                            "type": "string"
+                        },
+                        "email": {
+                            "type": "string"
+                        },
+                        "token": {
+                            "type": "string"
+                        }
+                    } 
+                }
+            }
+        },
+        "credentials": {
+            "type": "object",
+            "properties": {
+                "user":{
+                    "type":"object",
+                    "properties":{
+                        "email": {
+                            "type": "string"
+                        },
+                        "password": {
+                            "type": "string"
+                        }
+                    }
+                }
+            }
+        }
+    }
+}
