@@ -7,7 +7,7 @@ const swaggerDocument = require('./swagger.json');
 require('dotenv').config();
 const config = require('config');
 
-const DB_URL = config.get('db.db_url')
+const DB_URL = config.get('db.db_url');
 
 const reportsRootRoute = config.get('routes.reports.root');
 const reportsRouter = require('./resources/reports/router');
