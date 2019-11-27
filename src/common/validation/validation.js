@@ -1,6 +1,6 @@
 const Ajv = require('ajv');
 const ajv = Ajv({allErrors: true, jsonPointers:true, removeAdditional:'all'});
-require('ajv-errors')(ajv, {singleError: true});
+require('ajv-errors')(ajv);
 
 const signUpSchema = require('./schema/signUp.schema');
 const loginSchema = require('./schema/login.schema');
