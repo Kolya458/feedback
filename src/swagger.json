@@ -12,8 +12,8 @@
     "host": "localhost:3000",
     "basePath": "",
     "tags": [{
-        "name": "Reports",
-        "description": "Api for reports in the system"
+            "name": "Reports",
+            "description": "Api for reports in the system"
         },
         {
             "name": "Users",
@@ -93,6 +93,74 @@
                     }
                 }
             }
+        },
+
+        "/reports/new-users": {
+            "get": {
+                "tags": [
+                    "Reports"
+                ],
+                "summary": "List of new users in the system",
+                "security": [{
+                    "JWT": []
+                }],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/newUsersReport"
+                        }
+                    },
+                    "403": {
+                        "description": "Forbidden, no access token provided"
+                    }
+                }
+            }
+        },
+        "/reports/highest-salaries": {
+            "get": {
+                "tags": [
+                    "Reports"
+                ],
+                "summary": "List of users with higest salary",
+                "security": [{
+                    "JWT": []
+                }],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/higestSalaryReport"
+                        }
+                    },
+                    "403": {
+                        "description": "Forbidden, no access token provided"
+                    }
+                }
+            }
+        },
+
+        "/reports/top-employees": {
+            "get": {
+                "tags": [
+                    "Reports"
+                ],
+                "summary": "List of users with higest salary",
+                "security": [{
+                    "JWT": []
+                }],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/topUsersReport"
+                        }
+                    },
+                    "403": {
+                        "description": "Forbidden, no access token provided"
+                    }
+                }
+            }
         }
     },
 
@@ -131,6 +199,125 @@
                     }
                 }
             }
+        },
+
+        "newUser": {
+            "type":"object",
+            "properties": {
+                "name": {
+                    "type": "string"
+                },
+                "lastName": {
+                    "type": "string"
+                },
+                "join_date": {
+                    "type": "string"
+                }
+            }
+        },
+
+        "newUsers": {
+            "type": "array",
+            "items": {
+                "$ref": "#/definitions/newUser"
+            }
+        },
+
+        "newUsersReport": {
+            "type": "object",
+            "properties": {
+                "users":{
+                    "$ref":"#/definitions/newUsers"
+                }
+            }
+        },
+        "userWithSalary": {
+            "type":"object",
+            "properties": {
+                "name": {
+                    "type": "string"
+                },
+                "lastName": {
+                    "type": "string"
+                },
+                "salary": {
+                    "type": "string"
+                },
+                "salaryUsd": {
+                    "type": "string"
+                }
+            }
+        },
+    
+        "higestSalaryUsers": {
+            "type": "array",
+            "items": {
+                "$ref": "#/definitions/userWithSalary"
+            }
+        },
+    
+        "higestSalaryReport": {
+            "type": "object",
+            "properties": {
+                "users":{
+                    "$ref":"#/definitions/higestSalaryUsers"
+                }
+            }
+        },
+
+        "userWithBadge": {
+            "type":"object",
+            "properties": {
+                "name": {
+                    "type": "string"
+                },
+                "lastName": {
+                    "type": "string"
+                },
+                "badges": {
+                    "type": "array",
+                    "items": {
+                        "$ref":"#/definitions/badge"
+                    }
+                }
+            }
+        },
+    
+        "topUsers": {
+            "type": "array",
+            "items": {
+                "$ref": "#/definitions/userWithBadge"
+            }
+        },
+    
+        "topUsersReport": {
+            "type": "object",
+            "properties": {
+                "users":{
+                    "$ref":"#/definitions/topUsers"
+                }
+            }
+        },
+
+        "badge": {
+            "type":"object",
+            "properties": {
+                "name": {
+                    "type": "string"
+                },
+                "data": {
+                    "type": "string"
+                }
+            }
+        }
+
+    },
+
+    "securityDefinitions":{
+        "JWT": {
+          "type": "apiKey",
+          "in": "header",
+          "name": "Authorization"
         }
     }
 }
