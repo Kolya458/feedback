@@ -28,7 +28,7 @@ const UsersSchema = new mongoose.Schema({
     minlength: 1,
     maxlength: 50
   },
-  photoUrl: {
+  userpicUrl: {
       type: String,
       required: false
   },

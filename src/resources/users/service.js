@@ -56,8 +56,21 @@ const getUserProfile = (req, res, next) => {
           return res.sendStatus(400);
         }
   
-        return res.json({ user: user.getUser() });
+        return res.json({ user: user.getUser() })
+      .catch(error => {
+        return res.status(400).json({error});
+        });
       });
+}
+
+const changeUserpic = (req, res, next) => {
+  const {id} = req.user;
+  const newUserpicUrl = req.file.filename
+
+  Users.findByIdAndUpdate({_id: id}, {userpicUrl: newUserpicUrl})
+    .then(user => {
+      res.json({user: user.getUser()});
+    })
 }
 
 const authAction = (req, res, next) => {
@@ -85,5 +98,6 @@ const logout = (req, res) => {
 module.exports = {
     getUserProfile,
     authAction,
-    logout
+    logout,
+    changeUserpic
 }
