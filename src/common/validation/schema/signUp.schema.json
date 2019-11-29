@@ -11,7 +11,7 @@
                     "description": "email of the user account",
                     "format": "email",
                     "errorMessage": {
-                        "type": "email shoul be string",
+                        "type": "email should be string",
                         "format": "please, enter valid email"
                     }
                 },
@@ -21,13 +21,40 @@
                     "pattern": "^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[#?!@$%^&*-]).{8,}$",
                     "isNotEmpty": true,
                     "errorMessage": {
-                        "type": "password shoul be string",
+                        "type": "password should be string",
                         "isNotEmpty": "please, enter your password",
                         "pattern": "password should contains minimum 8 characters at least one letter in uppercase, at least one in lowercase, one number and one special symbol"
                     }
+                },
+                "firstName": {
+                    "type":"string",
+                    "description": "firstname of the user",
+                    "isNotEmpty": true,
+                    "errorMessage": {
+                        "type": "firstname should be string",
+                        "isNotEmpty": "please, enter your firstname"
+                    }
+                },
+                "lastName": {
+                    "type":"string",
+                    "description": "lastname of the user",
+                    "isNotEmpty": true,
+                    "errorMessage": {
+                        "type": "lastname should be string",
+                        "isNotEmpty": "please, enter your lastname"
+                    }
+                },
+                "profession": {
+                    "type":"string",
+                    "description": "profession of the user",
+                    "isNotEmpty": true,
+                    "errorMessage": {
+                        "type": "password should be string",
+                        "isNotEmpty": "please, enter your password"
+                    }
                 }
             },
-            "required": ["email", "password"]
+            "required": ["email", "password", "firstName", "lastName", "profession"]
         } 
     },
     "required": ["user"]

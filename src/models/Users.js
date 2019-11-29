@@ -9,7 +9,29 @@ const UsersSchema = new mongoose.Schema({
     type: String,
     required: true,
     unique: true
-},
+  },
+  firstName: {
+    type: String,
+    required: true,
+    minlength: 1,
+    maxlength: 50
+  },
+  lastName: {
+    type: String,
+    required: true,
+    minlength: 1,
+    maxlength: 50
+  },
+  profession: {
+    type: String,
+    required: true,
+    minlength: 1,
+    maxlength: 50
+  },
+  userpicUrl: {
+      type: String,
+      required: false
+  },
   hash: String,
   salt: String,
 });
