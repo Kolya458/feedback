@@ -1,6 +1,5 @@
 const {google} = require('googleapis');
 const config = require('config');
-const converter = require('csvtojson');
 const access_token = config.get('googleToken.access_token');
 const refresh_token = config.get('googleToken.refresh_token');
 

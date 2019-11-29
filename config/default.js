@@ -41,5 +41,10 @@ module.exports = {
 
     jwt: {
         secret: 'secret'
-    } 
+    },
+    
+    test: {
+        user: process.env.test_user,
+        password: process.env.test_password
+    }
 }
