@@ -42,7 +42,7 @@
                         "name": "body",
                         "descripton": "user that we want to create",
                         "schema": {
-                            "$ref": "#/definitions/credentials"
+                            "$ref": "#/definitions/signUpFields"
                         }
                     }
                 ],
@@ -194,6 +194,32 @@
                             "type": "string"
                         },
                         "password": {
+                            "type": "string"
+                        }
+                    }
+                }
+            }
+        },
+
+        "signUpFields": {
+            "type": "object",
+            "properties": {
+                "user":{
+                    "type":"object",
+                    "properties":{
+                        "email": {
+                            "type": "string"
+                        },
+                        "password": {
+                            "type": "string"
+                        },
+                        "firstname": {
+                            "type": "string"
+                        },
+                        "lastname": {
+                            "type": "string"
+                        },
+                        "profession": {
                             "type": "string"
                         }
                     }

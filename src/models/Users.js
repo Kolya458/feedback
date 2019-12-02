@@ -30,6 +30,7 @@ const UsersSchema = new mongoose.Schema({
   },
   userpicUrl: {
       type: String,
+      default: null,
       required: false
   },
   hash: String,
@@ -69,7 +70,11 @@ UsersSchema.methods.toAuthJSON = function() {
 UsersSchema.methods.getUser = function(){
   return {
     _id: this.id,
-    email: this.email
+    email: this.email,
+    firstName: this.firstName,
+    lastName: this.lastName,
+    profession: this.profession,
+    userpicUrl: this.userpicUrl
   }
 }
 
