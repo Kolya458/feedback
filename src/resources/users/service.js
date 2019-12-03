@@ -56,11 +56,9 @@ const getUserProfile = (req, res, next) => {
           return res.sendStatus(400);
         }
   
-        return res.json({ user: user.getUser() })
-      .catch(error => {
-        return res.status(400).json({error});
-        });
-      });
+        return res.json({ user: user.getUser()})
+      })
+      .catch(next);
 }
 
 const changeUserpic = (req, res, next) => {
