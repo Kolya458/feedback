@@ -7,7 +7,7 @@ const usersWithBadges = require('../../common/utils').usersWithBadges;
 
 const fileFromGoogleDrive = downloadFile();
 
-const getAppropriateData = (req ,res, callback) => {
+const getAppropriateData = (req ,res, next, callback) => {
     fileFromGoogleDrive.then(async(csvReport) => {
         const csvRow = await reportMapper(csvReport);
         const data = callback(csvRow);
@@ -15,24 +15,19 @@ const getAppropriateData = (req ,res, callback) => {
             users: data
         })
     })
-    .catch(err => {
-        console.log(err);
-        res.status(500).json({
-            err
-        });
-    })
+    .catch(next);
 };
 
-const getHigestSalaries = (req, res) => {
-    getAppropriateData(req, res, getSortedSalaries);
+const getHigestSalaries = (req, res, next) => {
+    getAppropriateData(req, res, next, getSortedSalaries);
 };
 
-const getNewUsers = (req, res) => {
-    getAppropriateData(req, res, newUsers);
+const getNewUsers = (req, res, next) => {
+    getAppropriateData(req, res, next, newUsers);
 };
 
-const getUsersWithBadges = (req, res) => {
-    getAppropriateData(req, res, usersWithBadges);
+const getUsersWithBadges = (req, res, next) => {
+    getAppropriateData(req, res, next, usersWithBadges);
 };
 
 module.exports = {

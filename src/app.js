@@ -21,7 +21,7 @@ app.use(bodyParser.json());
 
 mongoose.connect(DB_URL, {useNewUrlParser: true}, (err) => {
     if(err) {
-        console.log(`error to connect to database cause: ${err}`);
+        console.error(`error to connect to database cause: ${err}`);
     } else {
         console.log(`connect to db`);
     }
@@ -40,5 +40,9 @@ app.use('/swagger', swaggerUi.serve, swaggerUi.setup(swaggerDocument));
 
 app.use(reportsRootRoute, reportsRouter);
 app.use(usersRootRoute, usersRouter);
+
+app.use((err, req, res, next) => {
+    res.status(500).send({error: err.message});
+})
 
 module.exports = app;

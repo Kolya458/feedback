@@ -13,7 +13,7 @@ const createUser = async (req, res, next, user) => {
     let isUserExists;
     await Users.findOne({email: user.email})
       .then(data => isUserExists = !!data)
-      .catch(err => err);
+      .catch(next);
 
     if(!isUserExists){
       const finalUser = new Users(user);
@@ -21,7 +21,7 @@ const createUser = async (req, res, next, user) => {
       finalUser.setPassword(user.password);
   
       return finalUser.save()
-        .then(() => res.json({ user: finalUser.toAuthJSON() })).catch(err => {console.log(err)}) ;
+        .then(() => res.json({ user: finalUser.toAuthJSON() })).catch(next) ;
     } else {
       res.json({error: 'email already in use'})
     }
@@ -71,6 +71,7 @@ const changeUserpic = (req, res, next) => {
     .then(user => {
       res.json({user: user.getUser()});
     })
+    .catch(next);
 }
 
 const authAction = (req, res, next) => {
