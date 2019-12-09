@@ -3,5 +3,6 @@ token.json
 credentials.json
 .env
 test.config.js
+secret.conf.js
 
 

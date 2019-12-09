@@ -42,7 +42,9 @@ app.use(reportsRootRoute, reportsRouter);
 app.use(usersRootRoute, usersRouter);
 
 app.use((err, req, res, next) => {
-    res.status(500).send({error: err.message});
+    const status = err.message.split(':')[0];
+    const message = err.message.split(':')[1];
+    res.status(status || 500).send({error: message || err.message});
 })
 
 module.exports = app;

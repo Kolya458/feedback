@@ -17,7 +17,7 @@ const checkToken = (req, res, next) => {
       }
     })
   } else {
-    res.status(403).send({success: false, message: 'No token provided'});
+    next(new Error('400:No token provided'))
   }
 }
 

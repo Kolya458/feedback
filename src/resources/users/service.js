@@ -23,14 +23,14 @@ const createUser = async (req, res, next, user) => {
       return finalUser.save()
         .then(() => res.json({ user: finalUser.toAuthJSON() })).catch(next) ;
     } else {
-      res.json({error: 'email already in use'})
+      next(new Error('400:email already is used'))
     }
     
 
 };
 
 function loginUser(req, res, next) {
-    return passport.authenticate('local', { session: false }, (err, passportUser, info) => {
+    return passport.authenticate('local', { session: false }, (err, passportUser) => {
         if(err) {
           return next(err);
         }
@@ -42,7 +42,7 @@ function loginUser(req, res, next) {
           return res.json({ user: user.toAuthJSON() });
         }
         
-        return res.status(400).send(info);
+        return next(new Error('400:something went wrong'));
       })(req, res, next);
 }
   
@@ -53,7 +53,7 @@ const getUserProfile = (req, res, next) => {
     return Users.findById(id)
       .then((user) => {
         if(!user) {
-          return res.sendStatus(400);
+          return next(new Error('400:user not found'));
         }
   
         return res.json({ user: user.getUser()})
@@ -77,7 +77,7 @@ const authAction = (req, res, next) => {
     const {user} = req.body;
   
     if(!user.email || !user.password){
-      return res.status(400)
+      return next(new Error('400:email or password required'))
     }
 
     switch(req.url) {

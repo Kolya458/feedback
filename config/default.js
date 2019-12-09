@@ -1,23 +1,25 @@
+const secret = require('./secret.conf')
+
 module.exports = {
     googleAutorize: {
-        client_secret: process.env.client_secret,
-        redirect_uris: process.env.redirect_uris,
-        client_id : process.env.client_id
+        client_secret: secret.client_secret,
+        redirect_uris: secret.redirect_uris,
+        client_id : secret.client_id
     },
 
     files: {
-        file_id: process.env.file_id
+        file_id: secret.file_id
     },
 
     googleToken: {
-        access_token: process.env.access_token,
-        refresh_token: process.env.refresh_token,
-        token_type: process.env.token_type,
-        expiry_date: process.env.expiry_date
+        access_token: secret.access_token,
+        refresh_token: secret.refresh_token,
+        token_type: secret.token_type,
+        expiry_date: secret.expiry_date
     },
 
     db: {
-        db_url: process.env.db_url
+        db_url: secret.db_url
     },
 
     routes: {
@@ -44,7 +46,7 @@ module.exports = {
     },
     
     test: {
-        user: process.env.test_user,
-        password: process.env.test_password
+        user: secret.test_user,
+        password: secret.test_password
     }
 }
