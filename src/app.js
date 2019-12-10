@@ -1,5 +1,4 @@
 const express = require('express');
-const bodyParser = require('body-parser');
 const mongoose = require('mongoose');
 const swaggerUi = require('swagger-ui-express');
 const swaggerDocument = require('./swagger.json');
@@ -16,8 +15,7 @@ const app = express();
 
 app.disable('x-powered-by')
 
-app.use(bodyParser.urlencoded({extended: false}));
-app.use(bodyParser.json());
+app.use(express.json());
 
 mongoose.connect(DB_URL, {useNewUrlParser: true}, (err) => {
     if(err) {
