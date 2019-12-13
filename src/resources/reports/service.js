@@ -22,8 +22,6 @@ const getHigestSalaries = (req, res, next) => {
 };
 
 const getNewUsers = (req, res, next) => {
-    // paginationNewUsers = pagination(newUsers, req.body);
-    // console.log(paginationNewUsers)
     getAppropriateData(req, res, next, newUsers);
 };
 
