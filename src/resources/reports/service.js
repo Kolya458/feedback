@@ -1,9 +1,6 @@
 const downloadFile = require('../../common/downloadFile');
 const reportMapper = require('../../mapper/reportMapper');
-
-const getSortedSalaries = require('../../common/utils').getSortedSalaries;
-const newUsers = require('../../common/utils').newUsers;
-const usersWithBadges = require('../../common/utils').usersWithBadges;
+const {getSortedSalaries, newUsers, usersWithBadges} = require('../../common/utils')
 
 const fileFromGoogleDrive = downloadFile();
 

@@ -6,19 +6,12 @@ const service = require('./service');
 const validateSchema = require('../../common/validation/validation');
 const config = require('config');
 
-const signUpRoute = config.get('routes.users.signUp');
-const loginRoute = config.get('routes.users.login');
-const profileRoute = config.get('routes.users.profile');
-const logoutRoute = config.get('routes.users.logout');
+const {signUp, login, profile, logout, edit}  = config.get('routes.users');
 
-router.post(signUpRoute, validateSchema('sign-up'), service.authAction);
-
-router.post(loginRoute, validateSchema('login'), service.authAction);
-
-router.get(profileRoute, auth, service.getUserProfile);
-
-router.put('/edit', auth, upload.single('userpic'), service.changeUserpic);
-
-router.get(logoutRoute, service.logout);
+router.post(signUp, validateSchema('sign-up'), service.authAction);
+router.post(login, validateSchema('login'), service.authAction);
+router.get(profile, auth, service.getUserProfile);
+router.put(edit, auth, upload.single('userpic'), service.changeUserpic);
+router.get(logout, service.logout);
 
 module.exports = router;

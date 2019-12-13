@@ -1,14 +1,12 @@
-const express = require('express');
-const router = express.Router();
+const router = require('express').Router();
 const service = require('./service');
 const config = require('config');
 const auth = require('../auth/auth');
 
-const highestSalariesRoute = config.get('routes.reports.highestSalaries');
-const newUsersRoute = config.get('routes.reports.newUsers');
-const topEmployeesRoute = config.get('routes.reports.topEmployees');
+const {highestSalaries, newUsers, topEmployees}  = config.get('routes.reports');
 
-router.get(highestSalariesRoute, auth, service.getHigestSalaries);
-router.get(newUsersRoute, auth, service.getNewUsers);
-router.get(topEmployeesRoute, auth, service.getUsersWithBadges);
+router.get(highestSalaries, auth, service.getHigestSalaries);
+router.get(newUsers, auth, service.getNewUsers);
+router.get(topEmployees, auth, service.getUsersWithBadges);
+
 module.exports = router;

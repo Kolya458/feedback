@@ -36,7 +36,8 @@ module.exports = {
             profile: '/current',
             login: '/login',
             signUp: '/register',
-            logout: '/logout'
+            logout: '/logout',
+            edit: '/edit'
         }
         
     },
