@@ -4,11 +4,11 @@ const expect = chai.expect;
 const getNewUsers = require('../src/common/utils').newUsers;
 const users = require('./users.mock');
 const config = require('config');
+const app = require('../index');
 
-const newUsersRoute = config.get('routes.reports.newUsers');
-const reportsRoute = config.get('routes.reports.root')
-const testuser = require('./test.config').test_user;
-const testpassword =  require('./test.config').test_password;
+const { newUsers: newUsersRoute, root: reportsRoute } = config.get('routes.reports');
+const { testUser, testPassword } = require('./test.config');
+const { signUp, root: usersRoute }  = config.get('routes.users');
 
 chai.use(chaiHttp);
 chai.should();
@@ -40,9 +40,9 @@ describe('NewUsers', function () {
 
     describe("GET /", () => {
         it("should get all new users record", (done) => {
-             chai.request(`http://localhost:3000${reportsRoute}`)
-                 .get(newUsersRoute)
-                 .auth(testuser, testpassword)
+             chai.request(app)
+                 .get(`${reportsRoute}${newUsersRoute}`)
+                 .auth(testUser, testPassword)
                  .end((err, res) => {
                      res.should.have.status(200);
                      res.body.should.be.a('object');
@@ -50,6 +50,29 @@ describe('NewUsers', function () {
                 });
         });
     });
+});
+
+describe('users', () => {
+    it("should create new user", (done) => {
+        chai.request(app)
+            .post(`${usersRoute}${signUp}`)
+            .set('Content-Type', 'application/json')
+            .set('Accept', 'application/json')
+            .send({
+                "user": {
+                  "email": "rolingscope909@mail.ru",
+                  "password": "easyHARD6&",
+                  "firstName": "Ilia",
+                  "lastName": "Kamin",
+                  "profession": "js coder"
+                }
+              })
+            .end((err, res) => {
+                res.should.have.status(200);
+                res.body.should.be.json;
+                done();
+           });
+   });
 })
 
     

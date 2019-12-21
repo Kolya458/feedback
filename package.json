@@ -4,7 +4,8 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "test": "mocha"
+    "test": "cross-env NODE_ENV=test PORT=8081 mocha --timeout 10000 test/*.js --exit",
+    "start": "nodemon"
   },
   "author": "",
   "license": "ISC",
@@ -27,6 +28,7 @@
   "devDependencies": {
     "chai": "^4.2.0",
     "chai-http": "^4.3.0",
+    "cross-env": "^6.0.3",
     "mocha": "^6.2.2"
   }
 }
