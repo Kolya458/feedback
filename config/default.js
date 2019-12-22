@@ -37,7 +37,8 @@ module.exports = {
             login: '/login',
             signUp: '/register',
             logout: '/logout',
-            edit: '/edit'
+            edit: '/edit',
+            deleteUser: '/delete/:id'
         }
         
     },

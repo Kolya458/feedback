@@ -2,13 +2,15 @@ const chai = require('chai');
 const chaiHttp = require('chai-http');
 const expect = chai.expect;
 const getNewUsers = require('../src/common/utils').newUsers;
-const users = require('./users.mock');
+const { mockUser, mockUsers } = require('./users.mock');
+
 const config = require('config');
 const app = require('../index');
+const mongoose = require("mongoose");
 
 const { newUsers: newUsersRoute, root: reportsRoute } = config.get('routes.reports');
 const { testUser, testPassword } = require('./test.config');
-const { signUp, root: usersRoute }  = config.get('routes.users');
+const { signUp, root: usersRoute, deleteUser }  = config.get('routes.users');
 
 chai.use(chaiHttp);
 chai.should();
@@ -34,7 +36,7 @@ const expectedResult = [
 describe('NewUsers', function () {
     
     it('should return true if newusers result valid', function(){
-        const result = getNewUsers(users);
+        const result = getNewUsers(mockUsers);
         expect(result).to.eql(expectedResult);
     });
 
@@ -58,21 +60,21 @@ describe('users', () => {
             .post(`${usersRoute}${signUp}`)
             .set('Content-Type', 'application/json')
             .set('Accept', 'application/json')
-            .send({
-                "user": {
-                  "email": "rolingscope909@mail.ru",
-                  "password": "easyHARD6&",
-                  "firstName": "Ilia",
-                  "lastName": "Kamin",
-                  "profession": "js coder"
-                }
-              })
+            .send(mockUser)
             .end((err, res) => {
+                console.log(res)
                 res.should.have.status(200);
-                res.body.should.be.json;
+                res.body.user.should.be.a('object');
                 done();
            });
    });
-})
-
     
+    afterEach(async () => {
+        const collections = await mongoose.connection.db.collections();
+
+        for (let collection of collections) {
+            await collection.drop();
+        };
+    });
+
+})

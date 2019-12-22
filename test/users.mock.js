@@ -1,4 +1,4 @@
-module.exports =  [
+mockUsers = [
   { firstName: 'Sandra',
     lastName: 'McKenzie',
     photo: '1',
@@ -21,3 +21,18 @@ module.exports =  [
     salaryUsd: '850',
     badges: 'Tommy Hawley|true|Lois Bolton|true' }
 ];
+
+mockUser = {
+    "user": {
+      "email": "jerry@pique.cat",
+      "password": "easyHARD6&",
+      "firstName": "Jerard",
+      "lastName": "Pique",
+      "profession": "js coder"
+    }
+}
+
+module.exports = {
+  mockUser,
+  mockUsers
+}

@@ -89,6 +89,17 @@ const authAction = (req, res, next) => {
     }
 }
 
+const deleteUser = (req, res, next) => {
+  req.user.id === req.params.id?
+    Users.deleteOne({_id: req.user.id}).then(
+      () => {
+        logout(req, res);
+      }
+    )
+    .catch( err => next(err)) : 
+    next(new Error('400:bad request'));
+}
+
 const logout = (req, res) => {
   req.logout();
   res.redirect(rootRoute);
@@ -98,5 +109,6 @@ module.exports = {
     getUserProfile,
     authAction,
     logout,
-    changeUserpic
+    changeUserpic,
+    deleteUser
 }
