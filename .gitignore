@@ -4,5 +4,6 @@ credentials.json
 .env
 test.config.js
 secret.conf.js
+mockImage.jpeg
 
 
