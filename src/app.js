@@ -1,5 +1,7 @@
 const express = require('express');
 const mongoose = require('mongoose');
+const morgan = require('morgan');
+const winston = require('winston');
 const swaggerUi = require('swagger-ui-express');
 const swaggerDocument = require('../swagger.json');
 require('dotenv').config();
@@ -22,12 +24,9 @@ mongoose.connect(DB_URL, {useNewUrlParser: true}, (err) => {
 require('./models/Users');
 require('../config/passport');
 const usersRouter = require('./resources/users/router');
-const usersRootRoute = config.get('routes.users.root')
+const usersRootRoute = config.get('routes.users.root');
 
-app.get('/', (req, res, next) => {
-    res.send('now then');
-    next();
-});
+app.use(morgan('combined', { stream: winston.stream.write }));
 
 app.use('/swagger', swaggerUi.serve, swaggerUi.setup(swaggerDocument));
 
@@ -37,7 +36,13 @@ app.use(usersRootRoute, usersRouter);
 app.use((err, req, res, next) => {
     const status = err.message.split(':')[0];
     const message = err.message.split(':')[1];
+    winston.error(`${status || 500} - ${message || err.message} - ${req.originalUrl} - ${req.method} - ${req.ip}`);
     res.status(status || 500).send({error: message || err.message});
-})
+});
+
+app.get('/', (req, res, next) => {
+    res.send('now then');
+    next();
+});
 
 module.exports = app;
