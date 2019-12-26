@@ -16,9 +16,9 @@ app.use(express.json());
 
 mongoose.connect(DB_URL, {useNewUrlParser: true}, (err) => {
     if(err) {
-        console.error(`error to connect to database cause: ${err}`);
+        winston.error(`error to connect to database cause: ${err}`);
     } else {
-        console.log(`connect to db`);
+        winston.info(`connect to db`);
     }
 })
 require('./models/Users');

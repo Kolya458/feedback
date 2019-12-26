@@ -1,4 +1,5 @@
 const {google} = require('googleapis');
+const winston = require('../../../config/winston.conf');
 const config = require('config');
 const access_token = config.get('googleToken.access_token');
 const refresh_token = config.get('googleToken.refresh_token');
@@ -31,7 +32,7 @@ const getFile = (auth, fileId) => {
     })
     .then(response => response.data)
     .catch(err => {
-        console.log('The API returned an error: ' + err)
+        winston.error('The API returned an error: ' + err)
         return;
     });
 };

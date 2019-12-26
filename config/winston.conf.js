@@ -1,4 +1,3 @@
-// const appRoot = require('app-root-path');
 const winston = require('winston');
 const path = require('path');
 
