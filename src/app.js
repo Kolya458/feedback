@@ -1,7 +1,7 @@
 const express = require('express');
 const mongoose = require('mongoose');
 const morgan = require('morgan');
-const winston = require('winston');
+const winston = require('../config/winston.conf');
 const swaggerUi = require('swagger-ui-express');
 const swaggerDocument = require('../swagger.json');
 require('dotenv').config();
@@ -26,7 +26,7 @@ require('../config/passport');
 const usersRouter = require('./resources/users/router');
 const usersRootRoute = config.get('routes.users.root');
 
-app.use(morgan('combined', { stream: winston.stream.write }));
+app.use(morgan('combined', { stream: winston.stream }));
 
 app.use('/swagger', swaggerUi.serve, swaggerUi.setup(swaggerDocument));
 
