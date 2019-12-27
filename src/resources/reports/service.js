@@ -12,7 +12,7 @@ const getAppropriateData = (req ,res, next, callback) => {
         const users = pagination(data, req.body);
         res.status(200).json({
             users
-        })
+        });
     })
     .catch(next);
 };
